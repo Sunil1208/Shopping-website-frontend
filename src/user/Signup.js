@@ -51,6 +51,7 @@ const Signup = () => {
                 onChange={handleChange("name")}
                 type="text"
                 placeholder="Enter your name"
+                value={name}
               />
             </div>
             <div className="form-group">
@@ -60,6 +61,7 @@ const Signup = () => {
                 onChange={handleChange("email")}
                 type="email"
                 placeholder="Enter your email id"
+                value={email}
               />
             </div>
 
@@ -70,6 +72,7 @@ const Signup = () => {
                 className="form-control"
                 type="password"
                 placeholder="Enter a password"
+                value={password}
               />
             </div>
             <button onClick={onSubmit} className="btn btn-success btn-block">
@@ -81,9 +84,35 @@ const Signup = () => {
     );
   };
 
+  const successMessage = () => {
+      return(
+          <div className="row">
+            <div className="col-md-6 offset-sm-3 text-left">
+                <div className="alert alert-success" style={{display: success ? "" : "none"}}>
+                    You have successfully signed up. Please {" "} 
+                    <Link>Login Here</Link>
+                </div>
+            </div>
+          </div>
+        )
+  }
+
+  const errorMessage = () => {
+      return(
+        <div className="row">
+            <div className="col-md-6 offset-sm-3 text-left">
+                <div className="alert alert-danger" style={{display: error ? "" : "none"}}>
+                    {error}
+                </div>
+            </div>
+        </div>)
+}
+
   return (
     <Base title="Sign up page" description="A page for user to sign up!">
-      {signUpForm()}
+        {successMessage()}
+        {errorMessage()}  
+    {signUpForm()}
       <p className="text-light text-center">{JSON.stringify(values)}</p>
     </Base>
   );
