@@ -5,13 +5,15 @@
 }
 
 body {
+  min-height: 100vh;
+  position: relative;
   background: #343a40;
 }
 
 footer {
   position: absolute;
-  bottom: 0px;
+  top: 100%;
+  margin-top: 0px;
   right: 0px;
   left: 0px;
-
 }
