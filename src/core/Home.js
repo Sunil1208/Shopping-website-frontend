@@ -7,7 +7,7 @@ const Home = () => {
     
     
     return(
-        <Base title="Home Page">
+        <Base title="Home Page" description="Welcome to the Online shopping store">
         <div className="container">
             <div className="row">
                 <div className="col-4">
