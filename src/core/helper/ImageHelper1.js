@@ -2,7 +2,7 @@ import React from 'react';
 import { API } from '../../backend';
 
 
-const ImageHelper = ({product}) => {
+const ImageHelper1 = ({product}) => {
    const imageurl = product ? 
         `${API}/product/photo/${product._id}`:
         `https://images.pexels.com/photos/581087/pexels-photo-581087.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`
@@ -11,11 +11,11 @@ const ImageHelper = ({product}) => {
             <img
             src={imageurl}
             alt="photo"
-              style={{ maxHeight: "100%", maxWidth: "100%" }}
-              className="mb-2 ml-1 border-rounded"
+               style={{ maxHeight: "50%", maxWidth: "100%" }}
+              className="mb-2 ml-1 border-rounded container-fluid"
             />
           </div>
     )
 }
 
-export default ImageHelper;
+export default ImageHelper1;

@@ -19,7 +19,8 @@ export const addItemToCart = (item, next) => {
 export const loadCart = () => {
     if(typeof window!== undefined) {
         if(localStorage.getItem("cart")) {
-            return JSON.parse(localStorage.getItem("cart"))
+           return JSON.parse(localStorage.getItem("cart"))
+            
         }
     }
 }
@@ -42,9 +43,20 @@ export const removeItemFromCart = (productId) => {
     return cart;
 }
 
+// export const cartEmpty = next => {
+//     if(typeof window !== undefined) {
+//         let cart=[]
+//         localStorage.setItem("cart", JSON.stringify(cart));
+//         next();
+//     }
+// }
+
+
 export const cartEmpty = next => {
-    if(typeof window !== undefined) {
-        localStorage.removeItem("cart")
-        next();
+    if (typeof window !== undefined) {
+      localStorage.removeItem("cart");
+      let cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      next();
     }
-}
+  };

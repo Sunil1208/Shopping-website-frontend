@@ -3,6 +3,7 @@ import Base from '../core/Base';
 import { Link, Redirect } from 'react-router-dom';
 import { signin, authenticate, isAuthenticated } from '../auth/helper'
 
+
 const Signin = () => {
 
     const [values, setValues ] = useState({
@@ -73,6 +74,8 @@ const Signin = () => {
           </div>)
   }
 
+  
+
     const signInForm = () => {
         return(
             <div className="row">
@@ -99,7 +102,7 @@ const Signin = () => {
         {errorMessage()}
         {signInForm()}
         {performRedirect()}
-        <p className="text-white text-center">{JSON.stringify(values)}</p>
+        
         </Base>
     )
 }

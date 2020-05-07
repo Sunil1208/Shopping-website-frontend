@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth/helper";
 
+import home from './home.svg'
 
 
 const currentTab = (history, path) => {
@@ -11,13 +12,35 @@ const currentTab = (history, path) => {
     return { color: "#FFFFFF" };
   }
 };
-
+const getUser = () => {
+  const {user} = isAuthenticated()
+  return user.name;
+}
 const Menu = ({ history }) => (
+
   <div>
-    <ul className="nav nav-tabs bg-dark">
+    <ul className="nav nav-tabs " style={{backgroundColor:"#070739"}}>
+    {!isAuthenticated() && (
       <li className="nav-item">
         <Link style={currentTab(history, "/")} className="nav-link" to="/">
-          Home
+        <i class="fa fa-user fa-lg" aria-hidden="true" style={{color:"white"}}> Guest</i>
+        </Link>
+      </li>
+
+    )}
+
+    {isAuthenticated() && (
+      <li className="nav-item">
+        <Link style={currentTab(history, "/")} className="nav-link" to="/">
+        <i class="fa fa-user fa-lg" aria-hidden="true" style={{color:"white"}}> {getUser()}</i>
+        </Link>
+      </li>
+
+    )}
+
+      <li className="nav-item">
+        <Link style={currentTab(history, "/")} className="nav-link" to="/">
+        <i className="fa fa-home fa-lg" aria-hidden="true" style={{color:"white"}}> Home</i>
         </Link>
       </li>
       <li className="nav-item">
@@ -26,7 +49,9 @@ const Menu = ({ history }) => (
           className="nav-link"
           to="/cart"
         >
-          Cart
+        <i class="fa fa-shopping-cart fa-lg" aria-hidden="true" style={{color:"white"}}> Cart</i>
+
+          
         </Link>
       </li>
      
@@ -36,8 +61,7 @@ const Menu = ({ history }) => (
           style={currentTab(history, "/user/dashboard")}
           className="nav-link"
           to="/user/dashboard"
-        >
-          Dashboard
+        ><i class="fa fa-th-large fa-lg" aria-hidden="true" style={{color:"white"}}> Dashboard</i>
         </Link>
       </li>
       )}
@@ -49,7 +73,7 @@ const Menu = ({ history }) => (
           className="nav-link"
           to="/admin/dashboard"
         >
-          Dashboard
+        <i class="fa fa-th-large fa-lg"  aria-hidden="true" style={{color:"white"}}> Dashboard</i>
         </Link>
       </li>
       )}
@@ -61,8 +85,8 @@ const Menu = ({ history }) => (
             style={currentTab(history, "/signup")}
             className="nav-link"
             to="/signup"
-          >
-            Signup
+          ><i class="fas fa-user-plus fa-lg" style={{color:"white"}}> Signup</i>
+            
           </Link>
         </li>
         <li className="nav-item">
@@ -70,10 +94,11 @@ const Menu = ({ history }) => (
             style={currentTab(history, "/signin")}
             className="nav-link"
             to="/signin"
-          >
-            Sign In
+          ><i class="fas fa-sign-in-alt fa-lg" style={{color:"white"}}> Sign In</i>
+            
           </Link>
         </li>
+       
         </Fragment>
       )}
       {isAuthenticated() && (
@@ -86,7 +111,8 @@ const Menu = ({ history }) => (
               })
             }}
           >
-            Signout
+          <i class="fas fa-sign-out-alt fa-lg" style={{color:"white"}}> Signout</i>
+           
           </span>
       </li>
       ) }

@@ -9,6 +9,8 @@ import { createOrder } from './helper/orderHelper';
 
 const StripeCheckout = ({
     products,
+    amount,
+    count,
     setReload = f =>f, 
     reload = undefined
 }) => {
@@ -23,21 +25,6 @@ const StripeCheckout = ({
     const token = isAuthenticated() && isAuthenticated().token
     const userId = isAuthenticated()  && isAuthenticated().user._id
 
-    const getFinalPrice = () => {
-        let amount = 0
-        products.map((product, index) => {
-            amount = amount + product.price;  
-        })
-        return amount
-    }
-
-    const getCount = () => {
-        let counter = 0;
-        products.map((product,index) => {
-            counter = counter+1
-        })
-        return counter;
-    }
 
     const makePayment = (token) => {
         const body = {
@@ -48,15 +35,31 @@ const StripeCheckout = ({
         const headers = {
             "Content-Type": "application/json"
         }
-        return fetch(`${API}/stripePayment`,{
+        return fetch(`${API}/stripepayment`,{
             method: "POST",
             headers,
             body: JSON.stringify(body)
         }).then(response => {
-            console.log(response)
+            console.log(`Response is : ${response}`)
             const {status} = response;
             console.log(`Status is: ${status}`);
+            //TODO: call further methods
             
+            const orderData = {
+                products: products,
+                transaction_id: status.id,
+                amount: status.amount
+                //TODO: read from the documentation for transaction id
+                // transaction_id:
+
+            }
+
+            createOrder(userId, token, orderData)
+            
+            cartEmpty(() => {
+                console.log("Did we get a crash")
+            })
+            setReload(!reload)
 
         })
         .catch(err => console.log(err))
@@ -65,14 +68,14 @@ const StripeCheckout = ({
     const showStripeButton = () => {
         return isAuthenticated() ? (
             <StripeCheckoutButton
-                stripeKey="pk_test_knI5yHyMUqFDCRM7m18BSzN9001zZUo5qt"
+                stripeKey="pk_test_b0S748XWHdGDrIPtIvXougJK00qRXeXFp9"
                 token={makePayment}
-                amount={getFinalPrice() *100}
-                name={`Buy ${getCount()} Products`}
+                amount={amount *100}
+                name={`Buy ${count} Products`}
                 shippingAddress
                 billingAddress
             >
-            <button className="btn btn-success">Pay with stripe</button>
+            <button className="btn btn-dark rounded-pill  btn-block">Pay with stripe</button>
             </StripeCheckoutButton>
         ) : (
             <Link to = "/signin">
@@ -85,10 +88,10 @@ const StripeCheckout = ({
     
 
     return (
-        <div>
+        <div className="col-6">
             <h3 className="text-white">Stripe Checkout {getFinalPrice()}</h3>
             {showStripeButton()}
-        </div>
+            </div>
     )
 }
 

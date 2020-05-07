@@ -2,6 +2,7 @@ import React from 'react';
 import Base from '../core/Base';
 import { isAuthenticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
+import admin from './admin.jpg';
 
 
 const AdminDashBoard = () => {
@@ -12,8 +13,8 @@ const AdminDashBoard = () => {
 
     const adminLeftSide = () => {
         return(
-            <div className="card">
-                <h4 className="card-header bg-dark text-white">Admin Navigation</h4>
+            <div className="card">       
+                <h4 className="card-header" style={{backgroundColor:"#e4e4e4"}}>Admin Navigation</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <Link to="/admin/create/category" className="nav-link text-primary" >
@@ -47,20 +48,20 @@ const AdminDashBoard = () => {
 
     const adminRightSide = () => {
         return(
-            <div className="card mb-4">
-                <h4 className="card-header">Admin Information</h4>
+            <div className="card mb-4" style={{backgroundColor:"#e4e4e4"}}>
+                <h4 className="card-header border-dark">Admin Information</h4>
                 <ul className="list-group">
-                    <li className="list-group-item">
-                        <span className="badge badge-primary mr-3">
+                    <li className="list-group-item border-bottom-dark" style={{backgroundColor:"#e4e4e4"}}>
+                        <span className="badge badge-primary mr-3 text-white">
                             Name 
                         </span>{name}
                     </li>
-                    <li className="list-group-item">
-                        <span className="badge badge-primary mr-3">
+                    <li className="list-group-item border-bottom-dark " style={{backgroundColor:"#e4e4e4"}}>
+                        <span className="badge badge-primary mr-3 ">
                             Email 
                         </span>{email}
                     </li>
-                    <li className="list-group-item">
+                    <li className="list-group-item border-bottom-dark" style={{backgroundColor:"#e4e4e4"}}>
                         <span className="badge badge-danger mr-3">
                             Admin Privelege 
                         </span>
@@ -74,9 +75,10 @@ const AdminDashBoard = () => {
         <Base 
             title="Welcome to the Admin Page" 
             description="Manage products here"
-            className="container bg-primary p-4"
+            className="container  p-4"
+            photo={admin}
             >
-            <div className="row">
+            <div className="row mb-2 " style={{backgroundColor:"#241663"}}>
                 <div className="col-3">
                     {adminLeftSide()}
                 </div>
